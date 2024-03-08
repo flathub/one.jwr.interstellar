@@ -29,8 +29,8 @@
   <launchable type="desktop-id">one.jwr.interstellar.desktop</launchable>
 
   <branding>
-    <color type="primary" scheme_preference="light">#D77DCF</color>
-    <color type="primary" scheme_preference="dark">#294062</color>
+    <color type="primary" scheme_preference="light">#D378D4</color>
+    <color type="primary" scheme_preference="dark">#9708f7</color>
   </branding>
 
   <content_rating type="oars-1.1">
