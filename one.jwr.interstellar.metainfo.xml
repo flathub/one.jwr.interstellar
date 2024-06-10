@@ -39,7 +39,7 @@
   </content_rating>
 
   <url type="bugtracker">https://github.com/jwr1/interstellar/issues</url>
-  <url type="contact">https://matrix.to/#/#kbin-interstellar:matrix.org</url>
+  <url type="contact">https://matrix.to/#/#interstellar-space:matrix.org</url>
   <url type="vcs-browser">https://github.com/jwr1/interstellar</url>
 
   <screenshots>
@@ -58,8 +58,11 @@
   </screenshots>
 
   <releases>
-    <release version="0.5.0" date="2024-06-01">
+    <release version="0.5.1" date="2024-06-10">
       <description></description>
+    </release>
+    <release version="0.5.0" date="2024-06-01">
+      <description/>
     </release>
     <release version="0.4.2" date="2024-04-18"/>
     <release version="0.4.1" date="2024-03-19"/>
