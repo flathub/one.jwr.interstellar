@@ -114,9 +114,9 @@ modules:
       - type: archive
         only-arches:
           - x86_64
-        url: https://github.com/jwr1/interstellar/releases/download/v0.7.0/interstellar-linux-x86_64.tar.gz
+        url: https://github.com/jwr1/interstellar/releases/download/v0.7.1/interstellar-linux-x86_64.tar.gz
         dest: interstellar
-        sha256: 6acc4d5fa9267e5ab6f1de42a496ade91d377207f2ce8ae9eee49be7a542a2df
+        sha256: 313f648b24c132e08d2f27792fc40a77e5972b2032e7827c872b32784f91a19e
         strip-components: 0
         x-checker-data:
           type: json
