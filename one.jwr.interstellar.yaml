@@ -1,6 +1,6 @@
 id: one.jwr.interstellar
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: interstellar
 finish-args:
@@ -10,26 +10,25 @@ finish-args:
   - --share=network
   - --share=ipc
   - --device=dri
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '24.08'
+    add-ld-path: .
 modules:
   - name: libmpv
     cleanup:
       - /include
       - /lib/pkgconfig
       - /share/man
-    buildsystem: simple
-    build-commands:
-      - python3 waf configure --prefix=/app --enable-libmpv-shared --disable-cplayer
-        --disable-build-date --disable-alsa
-      - python3 waf build
-      - python3 waf install
+    buildsystem: meson
+    config-opts:
+      - '-Dbuild-date=false'
+      - '-Dlibmpv=true'
     sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
-        tag: v0.34.1
-      - type: file
-        url: https://waf.io/waf-2.0.22
-        sha256: 0a09ad26a2cfc69fa26ab871cb558165b60374b5a653ff556a0c6aca63a00df1
-        dest-filename: waf
+        tag: v0.39.0
     modules:
       - name: libass
         cleanup:
@@ -40,36 +39,8 @@ modules:
           - --disable-static
         sources:
           - type: archive
-            url: https://github.com/libass/libass/releases/download/0.15.2/libass-0.15.2.tar.xz
-            sha256: 1be2df9c4485a57d78bb18c0a8ed157bc87a5a8dd48c661961c625cb112832fd
-        modules:
-          - name: fribidi
-            cleanup:
-              - /bin
-              - /include
-              - /lib/pkgconfig
-              - /lib/*.la
-              - /share/man
-            buildsystem: meson
-            config-opts:
-              - --buildtype=release
-              - -Ddocs=false
-            sources:
-              - type: git
-                url: https://github.com/fribidi/fribidi.git
-                tag: v1.0.8
-      - name: x264
-        cleanup:
-          - /include
-          - /lib/pkgconfig
-          - /share/man
-        config-opts:
-          - --disable-cli
-          - --enable-shared
-        sources:
-          - type: git
-            url: https://code.videolan.org/videolan/x264.git
-            commit: 5db6aa6cab1b146e07b60cc1736a01f21da01154
+            url: https://github.com/libass/libass/releases/download/0.16.0/libass-0.16.0.tar.gz
+            sha256: fea8019b1887cab9ab00c1e58614b4ec2b1cee339b3f7e446f5fab01b032d430
       - name: nv-codec-headers
         cleanup:
           - '*'
@@ -80,31 +51,21 @@ modules:
           - type: git
             url: https://github.com/FFmpeg/nv-codec-headers.git
             tag: n11.1.5.1
-      - name: ffmpeg
+      - name: libplacebo
+        buildsystem: meson
         cleanup:
           - /include
           - /lib/pkgconfig
-          - /share/ffmpeg/examples
-        config-opts:
-          - --enable-shared
-          - --disable-static
-          - --enable-gnutls
-          - --disable-doc
-          - --disable-programs
-          - --disable-encoders
-          - --disable-muxers
-          - --enable-encoder=png
-          - --enable-libv4l2
-          - --enable-libdav1d
         sources:
           - type: git
-            url: https://git.ffmpeg.org/ffmpeg.git
-            tag: n5.1.4
+            url: https://github.com/haasn/libplacebo.git
+            tag: v7.349.0
   - name: interstellar
     buildsystem: simple
     only-arches:
       - x86_64
     build-commands:
+      - mkdir /app/lib/ffmpeg
       - cp -r interstellar/ /app/interstellar/
       - ln -s /app/interstellar/interstellar /app/bin/interstellar
       - install -Dm644 interstellar/data/flutter_assets/assets/icons/logo.png /app/share/icons/hicolor/512x512/apps/one.jwr.interstellar.png
@@ -122,7 +83,8 @@ modules:
           type: json
           url: https://api.github.com/repos/jwr1/interstellar/releases/latest
           version-query: .tag_name | sub("v";"")
-          url-query: .assets[] | select(.name=="interstellar-linux-x86_64.tar.gz")
+          url-query:
+            .assets[] | select(.name=="interstellar-linux-x86_64.tar.gz")
             | .browser_download_url
       - type: file
         path: one.jwr.interstellar.desktop
