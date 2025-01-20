@@ -15,6 +15,8 @@ add-extensions:
     directory: lib/ffmpeg
     version: '24.08'
     add-ld-path: .
+cleanup-commands:
+  - mkdir -p /app/lib/ffmpeg
 modules:
   - name: libmpv
     cleanup:
@@ -65,7 +67,6 @@ modules:
     only-arches:
       - x86_64
     build-commands:
-      - mkdir /app/lib/ffmpeg
       - cp -r interstellar/ /app/interstellar/
       - ln -s /app/interstellar/interstellar /app/bin/interstellar
       - install -Dm644 interstellar/data/flutter_assets/assets/icons/logo.png /app/share/icons/hicolor/512x512/apps/one.jwr.interstellar.png
