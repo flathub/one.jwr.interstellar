@@ -25,8 +25,8 @@ modules:
       - /share/man
     buildsystem: meson
     config-opts:
-      - '-Dbuild-date=false'
-      - '-Dlibmpv=true'
+      - -Dbuild-date=false
+      - -Dlibmpv=true
     sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
@@ -76,16 +76,15 @@ modules:
       - type: archive
         only-arches:
           - x86_64
-        url: https://github.com/jwr1/interstellar/releases/download/v0.7.1/interstellar-linux-x86_64.tar.gz
+        url: https://github.com/jwr1/interstellar/releases/download/v0.7.2/interstellar-linux-x86_64.tar.gz
         dest: interstellar
-        sha256: 313f648b24c132e08d2f27792fc40a77e5972b2032e7827c872b32784f91a19e
+        sha256: 7068b7c6e5451fab55bd473c307ea54eae842631480b667b2801e75154b60b52
         strip-components: 0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/jwr1/interstellar/releases/latest
           version-query: .tag_name | sub("v";"")
-          url-query:
-            .assets[] | select(.name=="interstellar-linux-x86_64.tar.gz")
+          url-query: .assets[] | select(.name=="interstellar-linux-x86_64.tar.gz")
             | .browser_download_url
       - type: file
         path: one.jwr.interstellar.desktop
