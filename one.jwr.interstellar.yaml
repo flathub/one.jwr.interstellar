@@ -64,8 +64,7 @@ modules:
             tag: v7.349.0
   - name: interstellar
     buildsystem: simple
-    only-arches:
-      - x86_64
+    only-arches: [x86_64, aarch64]
     build-commands:
       - cp -r interstellar/ /app/interstellar/
       - ln -s /app/interstellar/interstellar /app/bin/interstellar
@@ -74,8 +73,7 @@ modules:
       - install -Dm644 one.jwr.interstellar.metainfo.xml /app/share/appdata/one.jwr.interstellar.metainfo.xml
     sources:
       - type: archive
-        only-arches:
-          - x86_64
+        only-arches: [x86_64]
         url: https://github.com/jwr1/interstellar/releases/download/v0.8.0/interstellar-linux-x86_64.tar.gz
         dest: interstellar
         sha256: db850e8614322dcccd75aaec8b2fb8d9796cbaaa30ab9f2cf94112c002e7c2c9
@@ -84,8 +82,18 @@ modules:
           type: json
           url: https://api.github.com/repos/jwr1/interstellar/releases/latest
           version-query: .tag_name | sub("v";"")
-          url-query: .assets[] | select(.name=="interstellar-linux-x86_64.tar.gz")
-            | .browser_download_url
+          url-query: .assets[] | select(.name=="interstellar-linux-x86_64.tar.gz") | .browser_download_url
+      - type: archive
+        only-arches: [aarch64]
+        url: https://github.com/jwr1/interstellar/releases/download/v0.8.0/interstellar-linux-aarch64.tar.gz
+        dest: interstellar
+        sha256: b94f4fa9742ae0c6f739b2a21f4bef60224842dd9f1daf4ec8fea3ed7ababc50
+        strip-components: 0
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/jwr1/interstellar/releases/latest
+          version-query: .tag_name | sub("v";"")
+          url-query: .assets[] | select(.name=="interstellar-linux-aarch64.tar.gz") | .browser_download_url
       - type: file
         path: one.jwr.interstellar.desktop
       - type: file
