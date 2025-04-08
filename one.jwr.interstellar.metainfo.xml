@@ -3,7 +3,7 @@
   <id>one.jwr.interstellar</id>
 
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0-only</project_license>
+  <project_license>AGPL-3.0-only</project_license>
 
   <name>Interstellar</name>
   <summary>Connect with the fediverse</summary>
@@ -62,8 +62,11 @@
   </screenshots>
 
   <releases>
-    <release version="0.9.0" date="2025-03-25">
+    <release version="0.9.1" date="2025-04-08">
       <description></description>
+    </release>
+    <release version="0.9.0" date="2025-03-25">
+      <description/>
     </release>
     <release version="0.8.0" date="2025-02-27">
       <description/>
