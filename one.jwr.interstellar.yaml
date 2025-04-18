@@ -74,7 +74,7 @@ modules:
     sources:
       - type: archive
         only-arches: [x86_64]
-        url: https://github.com/jwr1/interstellar/releases/download/v0.9.1/interstellar-linux-x86_64.tar.gz
+        url: https://github.com/interstellar-app/interstellar/releases/download/v0.9.1/interstellar-linux-x86_64.tar.gz
         dest: interstellar
         sha256: 90059d0126fdac87a389005f3ef95fc21d7779e078fbceaecef83778e9dea326
         strip-components: 0
@@ -86,7 +86,7 @@ modules:
             | .browser_download_url
       - type: archive
         only-arches: [aarch64]
-        url: https://github.com/jwr1/interstellar/releases/download/v0.9.1/interstellar-linux-aarch64.tar.gz
+        url: https://github.com/interstellar-app/interstellar/releases/download/v0.9.1/interstellar-linux-aarch64.tar.gz
         dest: interstellar
         sha256: 4a8439feeab1dfc94c3509fc3ff0759e54a76ff2b47e45edfb12d1837ed9251d
         strip-components: 0
