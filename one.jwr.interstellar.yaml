@@ -10,58 +10,60 @@ finish-args:
   - --share=network
   - --share=ipc
   - --device=dri
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/doc
+  - /share/man
+  - '*.la'
+  - '*.a'
 modules:
   - name: libmpv
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /share/man
     buildsystem: meson
     config-opts:
       - -Dbuild-date=false
       - -Dlibmpv=true
+    cleanup:
+      - /share/applications
+      - /share/bash-completion
+      - /share/fish
+      - /share/zsh
     sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
-        tag: v0.39.0
+        tag: v0.41.0
+        commit: 41f6a645068483470267271e1d09966ca3b9f413
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+
     modules:
       - name: libass
-        cleanup:
-          - /include
-          - /lib/*.la
-          - /lib/pkgconfig
-        config-opts:
-          - --disable-static
-        sources:
-          - type: archive
-            url: https://github.com/libass/libass/releases/download/0.16.0/libass-0.16.0.tar.gz
-            sha256: fea8019b1887cab9ab00c1e58614b4ec2b1cee339b3f7e446f5fab01b032d430
-
-      - name: nv-codec-headers
-        cleanup:
-          - '*'
-        no-autogen: true
-        make-install-args:
-          - PREFIX=/app
+        buildsystem: meson
         sources:
           - type: git
-            url: https://github.com/FFmpeg/nv-codec-headers.git
-            tag: n11.1.5.1
+            url: https://github.com/libass/libass.git
+            tag: 0.17.4
+            commit: bbb3c7f1570a4a021e52683f3fbdf74fe492ae84
+            x-checker-data:
+              type: git
+              version-scheme: semantic
+
       - name: libplacebo
         buildsystem: meson
-        cleanup:
-          - /include
-          - /lib/pkgconfig
+        config-opts:
+          - -Ddemos=false
         sources:
           - type: git
             url: https://github.com/haasn/libplacebo.git
-            tag: v7.349.0
-          - type: patch
-            path: fix-libplacebo-vulkan-python-xml.patch
+            tag: v7.360.1
+            commit: cee9b076f2c63104ccfd497fa79c39a867293ec4
+            x-checker-data:
+              type: git
+              tag-pattern: ^v([\d.]+)$
 
   - name: interstellar
     buildsystem: simple
-    only-arches: [x86_64, aarch64]
     build-commands:
       - cp -r interstellar/ /app/interstellar/
       - ln -s /app/interstellar/interstellar /app/bin/interstellar
@@ -70,24 +72,28 @@ modules:
       - install -Dm644 one.jwr.interstellar.metainfo.xml /app/share/appdata/one.jwr.interstellar.metainfo.xml
     sources:
       - type: archive
-        only-arches: [x86_64]
+        only-arches:
+          - x86_64
         url: https://github.com/interstellar-app/interstellar/releases/download/v0.11.2/interstellar-linux-x86_64.tar.gz
         dest: interstellar
         sha256: bbf75b0dcc2c3313c25403ba82065331a0f60641f2b1b64c47b07acfc5519910
         strip-components: 0
         x-checker-data:
+          is-main-source: true
           type: json
           url: https://api.github.com/repos/interstellar-app/interstellar/releases/latest
           version-query: .tag_name | sub("v";"")
           url-query: .assets[] | select(.name=="interstellar-linux-x86_64.tar.gz")
             | .browser_download_url
       - type: archive
-        only-arches: [aarch64]
+        only-arches:
+          - aarch64
         url: https://github.com/interstellar-app/interstellar/releases/download/v0.11.2/interstellar-linux-aarch64.tar.gz
         dest: interstellar
         sha256: 53a6d4231d4bd135b0e21b418fd94e42d7effbe9d88b06cedbf060746aa3d15c
         strip-components: 0
         x-checker-data:
+          is-main-source: true
           type: json
           url: https://api.github.com/repos/interstellar-app/interstellar/releases/latest
           version-query: .tag_name | sub("v";"")
