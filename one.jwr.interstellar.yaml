@@ -74,9 +74,9 @@ modules:
       - type: archive
         only-arches:
           - x86_64
-        url: https://github.com/interstellar-app/interstellar/releases/download/v0.11.2/interstellar-linux-x86_64.tar.gz
+        url: https://github.com/interstellar-app/interstellar/releases/download/v0.11.3/interstellar-linux-x86_64.tar.gz
         dest: interstellar
-        sha256: bbf75b0dcc2c3313c25403ba82065331a0f60641f2b1b64c47b07acfc5519910
+        sha256: f69e57ab245153962551bfc9307aa1b70bb3b9bee96bb871fc0170b9ef64e86c
         strip-components: 0
         x-checker-data:
           is-main-source: true
@@ -88,9 +88,9 @@ modules:
       - type: archive
         only-arches:
           - aarch64
-        url: https://github.com/interstellar-app/interstellar/releases/download/v0.11.2/interstellar-linux-aarch64.tar.gz
+        url: https://github.com/interstellar-app/interstellar/releases/download/v0.11.3/interstellar-linux-aarch64.tar.gz
         dest: interstellar
-        sha256: 53a6d4231d4bd135b0e21b418fd94e42d7effbe9d88b06cedbf060746aa3d15c
+        sha256: 21d989aec1fd4cb40cdd478b600142d699b9633205a1dd75e0a3d4af0c3d6f43
         strip-components: 0
         x-checker-data:
           is-main-source: true
