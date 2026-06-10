@@ -26,6 +26,13 @@
     </p>
   </description>
 
+  <keywords>
+    <keyword>lemmy</keyword>
+    <keyword>mbin</keyword>
+    <keyword>piefed</keyword>
+    <keyword>fediverse</keyword>
+  </keywords>
+
   <launchable type="desktop-id">one.jwr.interstellar.desktop</launchable>
 
   <branding>

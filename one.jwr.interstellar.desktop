@@ -3,4 +3,5 @@ Type=Application
 Name=Interstellar
 Exec=interstellar %u
 Icon=one.jwr.interstellar
+Keywords=lemmy;mbin;piefed;fediverse
 Categories=Network
