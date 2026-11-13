@@ -1,6 +1,6 @@
 id: one.jwr.interstellar
 runtime: org.freedesktop.Platform
-runtime-version: '25.08'
+runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
 command: interstellar
 finish-args:
@@ -10,6 +10,10 @@ finish-args:
   - --share=network
   - --share=ipc
   - --device=dri
+  # UnifiedPush
+  - --talk-name=org.unifiedpush.Distributor.*
+  # Used to show notifications
+  - --talk-name=org.freedesktop.Notifications
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -70,6 +74,7 @@ modules:
       - install -Dm644 interstellar/data/flutter_assets/assets/icons/logo.png /app/share/icons/hicolor/512x512/apps/one.jwr.interstellar.png
       - install -Dm644 one.jwr.interstellar.desktop /app/share/applications/one.jwr.interstellar.desktop
       - install -Dm644 one.jwr.interstellar.metainfo.xml /app/share/appdata/one.jwr.interstellar.metainfo.xml
+      - install -Dm644 one.jwr.interstellar.service /app/share/dbus-1/services/one.jwr.interstellar.service
     sources:
       - type: archive
         only-arches:
@@ -103,3 +108,5 @@ modules:
         path: one.jwr.interstellar.desktop
       - type: file
         path: one.jwr.interstellar.metainfo.xml
+      - type: file
+        path: one.jwr.interstellar.service
