@@ -9,10 +9,14 @@
   <summary>Connect with the fediverse</summary>
 
   <supports>
-    <control>pointing</control>
     <control>keyboard</control>
+    <control>pointing</control>
     <control>touch</control>
   </supports>
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
 
   <developer id="one.jwr">
     <name>jwr1</name>
